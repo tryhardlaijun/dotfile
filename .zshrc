@@ -77,7 +77,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting zsh-autosuggestions)
+plugins=(git zsh-syntax-highlighting zsh-autosuggestions zsh-history-substring-search)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -109,14 +109,34 @@ source $ZSH/oh-my-zsh.sh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-. /usr/share/autojump/autojump.sh
+[[ -s /home/wenju/.autojump/etc/profile.d/autojump.sh ]] && source /home/wenju/.autojump/etc/profile.d/autojump.sh
+autoload -U compinit && compinit -u
 export PATH="$HOME/.local/share/bob/nightly/nvim-linux64/bin:$PATH"
+export TERM=xterm-256color
+
+alias set_env='python -m venv venv'
+alias ae='source venv/bin/activate'
+alias de='deactivate'
 alias vi=nvim
 alias vim=nvim
 alias ls=exa
-alias cat=batcat
 alias clip="xclip -selection clipboard"
 alias :q="exit"
 alias q="exit"
-export TERM=xterm-256color
+alias code="vi"
+alias vsc="vi"
+alias vscode="vi"
+alias vs="vi"
+alias v="vi"
+alias gs="git status"
+alias update="sudo apt update && sudo apt upgrade"
+alias docker_prune_all="docker system prune -a --volumes"
+alias clr="clear"
+alias icat="kitty +kitten icat"
+
+GTK_IM_MODULE=fcitx
+QT_IM_MODULE=fcitx
+XMODIFIERS=@im=fcitx
+
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey "$terminfo[kcud1]" history-substring-search-down
